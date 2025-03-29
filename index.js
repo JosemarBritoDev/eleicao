@@ -25,11 +25,11 @@ async function main() {
         console.log('1 - Cadastrar Candidatos');
         console.log('2 - Iniciar Eleição');
         console.log('3 - Imprimir Candidatos');
-        const opcao = await question('Escolha uma opção: ')
+        const opcao = await question('Escolha uma opção: ');
 
         switch (opcao) {
             case '1':
-                await cadastrarCandidatos();
+                await cadastrarCandidato();
                 break;
 
             case '2':
@@ -44,18 +44,44 @@ async function main() {
             case '3':
                 console.log('\nOs candidatos são: ');
                 candidatos.forEach(function (candidato) {
-                    console.log('nome: ${candidato.nome}, Numero: ${candidato.numero} ');
+                    console.log('Nome: ${candidato.nome}, Numero: ${candidato.numero}');
                 });
                 console.log('\n');
                 break
-                default:
-                    console.error('\nOpção inválida. Tente novamente\n')
+            default:
+                console.error('\nOpção inválida. Tente novamente\n');
         }
 
     } while (continuarLoop)
-        readline.close();
+    readline.close();
 
-    async function cadastrarCandidatos() { }
+    async function cadastrarCandidato() {
+        const numero = await question('\nDigite o número do candidato: ');
+
+        if (isNaN(numero)) {
+            console.error('\nO candidato deve receber um número. Tente novamente.\n');
+            return;
+        }
+
+        const candidatoExiste = candidatos.find(function (candidato) {
+            return candidato.numero === numero;
+        });
+        if (candidatoExiste) {
+            console.error('\Já existe um candidato com este número. Por favor, tente novamente com um número diferente.\n')
+
+            return;
+        }
+            const nome = await question('Digite o nome do candidato: ')
+
+            const novoCandidato = { numero, nome };
+
+            candidatos.push(novoCandidato);
+
+            votos[novoCandidato.numero] = 0;
+
+            console.log('\n${novoCandidato.nome} cadastrado com sucesso:\n');
+        
+    }
 
     async function iniciarEleicao() { }
 
