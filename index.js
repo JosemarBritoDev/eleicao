@@ -17,7 +17,7 @@ const candidatos = [];
 const votos = {};
 
 async function main() {
-    console.log("### Bem vindo ao sistema eleitoral da TreinaWeb ###");
+    console.log("### Bem vindo ao sistema eleitoral da BritosCode Tecnologia ###");
     console.log("\nEscolha um número das opções a seguir\n");
 
     let continuarLoop = true;
@@ -86,15 +86,15 @@ async function cadastrarCandidato() {
 
 async function iniciarEleicao() {
     console.log("\nEleição inicializada");
-    console.log("Digite 'fim' para encerrar a eleição. ");
+    console.log("Digite '0' para encerrar a eleição. ");
 
     let continuarLoop = true;
     do {
 
         const numero = await question('Digite o número do candidato em que deseja votar: ');
-        if (numero === 'fim') {
+        if (numero === '0') {
             continuarLoop = false;
-            console.log('\nFinal da Eleição\n');
+            console.log('\nFinal da Eleição:\n');
             resultadoDaEleicao();
             return;
         }
@@ -103,14 +103,37 @@ async function iniciarEleicao() {
             console.error('\nCandidato Inexistente. Tente novamente.\n');
         } else {
             votos[numero]++;
-        console.log(`Voto para o candidato ${numero} confirmado!`);
+            console.log(`Voto para o candidato ${numero} confirmado!`);
 
         }
     } while (continuarLoop)
 }
 
-function resultadoDaEleicao(){
-    
+function resultadoDaEleicao() {
+    const resultado = candidatos.map(function (candidato) {
+        return { nome: candidato.nome, numero: candidato.numero, votos: votos[candidato.numero] }
+
+
+    })
+
+    resultado.sort(function (a, b) {
+        return b.votos - a.votos;
+    });
+
+    const candidatoVencedor = resultado[0];
+
+    const totalVotos = Object.values(votos).reduce(function (previousValue, currentValue) {
+        return previousValue + currentValue;
+    }, 0);
+
+    console.log('\nResultado da eleição na BritosCode Tecnologia!\n')
+    console.log(`O vencedor da eleição nesta votação foi: ${candidatoVencedor.nome} com um total de ${candidatoVencedor.votos} votos.`)
+    console.log(`Total de votos validos: ${totalVotos}`);
+    console.log('\nLista de candidatos e votos.\n');
+    resultado.forEach(function (candidato) {
+        console.log(`Nome: ${candidato.nome}, Número: ${candidato.numero}, Votos: ${candidato.votos}`);
+
+    });
 }
 
 
