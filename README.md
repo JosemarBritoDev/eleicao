@@ -4,10 +4,10 @@ Neste projeto prático, tive a oportunidade de construir um sistema eleitoral in
 
 Este projeto foi um excelente recurso para desenvolver suas habilidades em programação, lógica de decisão, manipulação de dados e interação com o usuário.
 
-Conhecimentos adquiridos
+### Conhecimentos adquiridos:
 Ao longo deste projeto, tive a chance de aprimorar minhas habilidades de programação e compreender mais profundamente como criar um sistema eleitoral interativo utilizando JavaScript.
 
-Tive a oportunidade de adquirir conhecimentos nos seguintes segmentos:
+### Tive a oportunidade de adquirir conhecimentos nos seguintes segmentos:
 
 - Manipulação de entrada do usuário;
 - Estruturas de controle de fluxo;
